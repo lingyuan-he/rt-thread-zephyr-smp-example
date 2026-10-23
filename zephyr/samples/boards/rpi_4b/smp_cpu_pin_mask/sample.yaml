@@ -1,0 +1,7 @@
+sample:
+  description: CPU pinning with symmetric multi-processing on Raspberry 4B
+  name: SMP CPU pinning rpi_4b
+common:
+  tags: introduction
+  integration_platforms:
+    - rpi_4b
