@@ -1,0 +1,4 @@
+enable_uart=1
+kernel=u-boot64.bin
+arm_64bit=1
+total_mem=1024
