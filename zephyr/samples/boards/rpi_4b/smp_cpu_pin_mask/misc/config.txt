@@ -1,0 +1,6 @@
+arm_64bit=1
+kernel_address=0x200000
+kernel=zephyr.bin
+enable_uart=1
+uart_2ndstage=1
+hdmi_force_hotplug=1

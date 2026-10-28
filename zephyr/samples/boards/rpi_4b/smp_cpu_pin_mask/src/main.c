@@ -3,14 +3,14 @@
 #include <zephyr/kernel.h>
 #include <zephyr/arch/arch_interface.h>
 
-/* Number of threads */
+// Number of threads
 #define THREADS_NUM	4
 
 #define STACK_SIZE	4096
 
 static K_THREAD_STACK_ARRAY_DEFINE(THREAD_STACKS, THREADS_NUM, STACK_SIZE);
 static struct k_thread THREADS[THREADS_NUM];
-static unsigned int THREAD_NUM_ARGS[THREADS_NUM] = {1, 2, 3, 4};
+static unsigned int THREAD_NUM_ARGS[THREADS_NUM];
 
 void thread_entry(void *arg1, void *arg2, void *arg3)
 {
@@ -39,6 +39,7 @@ int main(void)
 	printk("Demo for SMP CPU pinning and masking.\n");
 
 	for (i = 0; i < THREADS_NUM; i++) {
+        THREAD_NUM_ARGS[i] = i + 1;
 		pid = k_thread_create(
             &THREADS[i], /* thread struct */
             THREAD_STACKS[i], /* thread stack */
@@ -63,7 +64,7 @@ int main(void)
             k_thread_cpu_mask_disable(pid, 1);
             k_thread_cpu_mask_disable(pid, 3);
         }
-        // No binding for the last thread.
+        // Otherwise, no binding.
 
         k_thread_start(pid);
 	}
