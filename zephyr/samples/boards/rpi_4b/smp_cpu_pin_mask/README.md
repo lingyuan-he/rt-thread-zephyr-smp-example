@@ -1,8 +1,8 @@
 # Zephyr RTOS SMP多核处理器绑定样例
 
-该文件夹包含样例代码和Zephyr需要的配置文件，基于Zephyr 4.5.0 RC3构建和测试。
+该文件夹包含样例代码和Zephyr需要的配置文件，基于Zephyr 4.5.0构建和测试。
 
-注意：老于4.5.0版本树莓派4B的SMP支持不完整，见https://github.com/zephyrproject-rtos/zephyr/pull/114441。
+注意：老于4.5.0版本对树莓派4B的SMP支持不完整，见拉取请求https://github.com/zephyrproject-rtos/zephyr/pull/114441。
 
 样例按照宏定义的线程数创建线程，头三个线程会通过Zephyr不同的API依次与处理器核心0、1、2绑定，其余线程自由执行。每秒线程均会唤醒并打印执行的处理器核心号。树莓派4B为4核处理器，预设定义为4线程，其中线程1到3会绑定核心0到2。
 
@@ -130,7 +130,7 @@ sudo mkfs.ext4 -L "ROOTFS" /dev/sdb2
 运行输出样例：
 
 ```
-MESS:00:00:05.099176:0:*** Booting Zephyr OS build v4.5.0-rc3 ***
+MESS:00:00:05.395122:0:*** Booting Zephyr OS build v4.5.0 ***
 Secondary CPU core 1 (MPID:0x1) is up
 Secondary CPU core 2 (MPID:0x2) is up
 Secondary CPU core 3 (MPID:0x3) is up
@@ -140,9 +140,13 @@ Thread 2 is running on core 1, count: 0
 Thread 3 is running on core 2, count: 0
 Thread 4 is running on core 0, count: 0
 Thread 2 is running on core 1, count: 1
-Thread 3 is running on core 2, count: 1
-Thread 4 is running on core 3, count: 1
 Thread 1 is running on core 0, count: 1
+Thread 3 is running on core 2, count: 1
+Thread 4 is running on core 0, count: 1
+Thread 1 is running on core 0, count: 2
+Thread 2 is running on core 1, count: 2
+Thread 3 is running on core 2, count: 2
+Thread 4 is running on core 3, count: 2
 ```
 
 ## 4. 参考链接
